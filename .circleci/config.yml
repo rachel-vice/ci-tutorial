@@ -1,5 +1,4 @@
 version: 2.1
-
 jobs:
   hello-world:
     docker:
@@ -8,18 +7,8 @@ jobs:
       - run:
           name: Print Hello World
           command: echo 'Hello, World!'
-
-  say_hi:
-    docker:
-      - image: circleci/python:3.8
-    steps:
-      - run:
-          name: Say Hi
-          command: echo 'Hi, World!'
-
 workflows:
   version: 2
   hello-world-workflow:
     jobs:
       - hello-world
-      - say_hi:
