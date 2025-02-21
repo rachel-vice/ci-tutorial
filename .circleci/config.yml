@@ -19,4 +19,3 @@ workflows:
   hello-world-workflow:
     jobs:
       - hello-world
-      - hi-world
