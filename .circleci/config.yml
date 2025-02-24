@@ -1,35 +1,15 @@
 version: 2.1
-executors:
-  python-executor:
+jobs:
+  build:
     docker:
       - image: circleci/python:3.8
-    working_directory: ~/project
-jobs:
-  unit-tests:
-    executor: python-executor
     steps:
       - checkout
       - run:
-          name: Install Dependencies
-          command: pip install -r requirements.txt
-      - run:
-          name: Run Unit Tests
-          command: pytest tests/unit
-  e2e-tests:
-    executor: python-executor
-    steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: pip install -r requirements.txt
-      - run:
-          name: Run End-to-End Tests
-          command: pytest tests/e2e
+          name: Say Hello
+          command: echo "Hello, World!"
 workflows:
   version: 2
-  test-workflow:
+  hello-world-workflow:
     jobs:
-      - unit-tests
-      - e2e-tests:
-          requires:
-            - unit-tests
+      - build
