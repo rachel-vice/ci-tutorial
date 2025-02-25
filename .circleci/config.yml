@@ -8,8 +8,24 @@ jobs:
       - run:
           name: Say Hello
           command: echo "Hello, World!"
+  check_service:
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - run:
+          name: Check if Service is Running
+          command: |
+            if curl --fail http://localhost:8000; then
+              echo "Service is up and running!"
+            else
+              echo "Service is not running!"
+              exit 1
+            fi
 workflows:
   version: 2
   hello-world-workflow:
     jobs:
       - build
+      - check_service:
+          requires:
+            - build
