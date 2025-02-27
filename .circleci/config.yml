@@ -24,12 +24,20 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Calculate Sum
-          command: echo $((2 + 7))
+          name: Store and Print Sum
+          command: |
+            SUM=$((2 + 7))
+            # Replace this with your database command to store $SUM
+            echo "Storing $SUM in the database"
+            echo $SUM
 workflows:
   version: 2
-  hello-world-workflow:
+  optimized-workflow:
     jobs:
-      - hello-world
       - new-job
-      - calculate-sum
+      - calculate-sum:
+          requires:
+            - new-job
+      - hello-world:
+          requires:
+            - calculate-sum
