@@ -19,9 +19,17 @@ jobs:
       - run:
           name: Print New Job
           command: echo "This is a new job!"
+  calculate-sum:
+    executor: default-executor
+    steps:
+      - checkout
+      - run:
+          name: Calculate Sum
+          command: echo $((2 + 7))
 workflows:
   version: 2
   hello-world-workflow:
     jobs:
       - hello-world
       - new-job
+      - calculate-sum
